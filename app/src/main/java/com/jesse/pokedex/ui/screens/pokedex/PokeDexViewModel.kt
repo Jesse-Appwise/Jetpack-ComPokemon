@@ -13,7 +13,6 @@ class PokeDexViewModel : BaseViewModel() {
 
     private val query = MutableStateFlow("")
     fun setQuery(newQuery: String) {
-        Log.d("PokeDexViewModel", "setQuery: $newQuery")
         query.tryEmit(newQuery)
     }
 
@@ -28,7 +27,6 @@ class PokeDexViewModel : BaseViewModel() {
             500L
         }
     }.flatMapLatest { query ->
-        Log.d("PokeDexViewModel", "flatmap: $query")
         if (query.isEmpty()) {
             PokemonRepository.findAllPokemons()
         } else {

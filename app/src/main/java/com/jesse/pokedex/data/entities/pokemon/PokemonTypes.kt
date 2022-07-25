@@ -63,8 +63,7 @@ enum class PokemonTypes(val color: Color) {
     @SerializedName("steel")
     STEEL(Color(0xFFB7B7CE)),
     @SerializedName("fairy")
-    FAIRY(Color(0xFFD685AD))
-    ;
+    FAIRY(Color(0xFFD685AD));
 
     @Composable
     fun TypeChip(modifier: Modifier = Modifier) {

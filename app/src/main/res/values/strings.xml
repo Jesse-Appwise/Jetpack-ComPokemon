@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="search_pokemon">Search pokemon</string>
+    <string name="my_team">My team</string>
+    <string name="my_favorites">My favorites</string>
+    <string name="format_number">Nr. %03d</string>
+</resources>

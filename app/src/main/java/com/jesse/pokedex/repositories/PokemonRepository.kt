@@ -15,6 +15,7 @@ object PokemonRepository : BaseRepository {
     fun findAllQueriedPokemons(query: String) = pokeDao.findAllQueried(query)
     fun findAllFavoritePokemons() = favoriteDao.findFavoritePokemons()
     fun findTeam() = teamDao.findTeamMemberPokemons()
+    fun findPokemonById(pokemonId: Int) = pokeDao.findById(pokemonId)
 
     suspend fun getPokemons() = doCall(RestClient.pokeService.getPokemons()).also { pokemons ->
         pokeDao.insertMany(pokemons)

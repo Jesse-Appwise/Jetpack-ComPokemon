@@ -5,5 +5,6 @@ enum class Destinations(
 ) {
     PokedexScreen("pokedex"),
     FavoritesScreen("favorites"),
-    MyTeamScreen("my_team");
+    MyTeamScreen("my_team"),
+    PokemonDetailScreen("pokemon/{pokemonId}");
 }

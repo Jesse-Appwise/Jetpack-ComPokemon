@@ -2,6 +2,7 @@ package com.jesse.pokedex.data.entities.pokemon
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.room.Entity
@@ -34,4 +35,6 @@ data class Pokemon(
             types[1].type.name.TypeChip()
         }
     }
+
+    fun getTypeColor(): Color? = types.firstOrNull()?.type?.name?.color
 }

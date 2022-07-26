@@ -51,7 +51,7 @@ fun FavoritesScreen(
 }
 
 @Composable
-fun initAppState(setAppState: SetAppState) {
+private fun initAppState(setAppState: SetAppState) {
     val appBar = AppBarState(
         title = stringResource(id = R.string.my_favorites),
         titleColor = Colors.Font_White

@@ -81,6 +81,9 @@ fun PokeDexScreen(
                     text = stringResource(id = R.string.empty_pokemons),
                     textColor = Colors.Font_Black
                 )
+            },
+            onPokemonClicked = {
+                navHostController.navigate("pokemon/${it.id}")
             }
         )
     }

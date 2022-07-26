@@ -2,6 +2,7 @@ package com.jesse.pokedex.ui.shared.lists.pokemon
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,10 +24,12 @@ fun PokemonItemPreview() {
     )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PokemonItem(
     pokemon: Pokemon,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -35,7 +38,8 @@ fun PokemonItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min),
-            elevation = 15.dp
+            elevation = 15.dp,
+            onClick = onClick
         ) {
             Row(
                 modifier = Modifier

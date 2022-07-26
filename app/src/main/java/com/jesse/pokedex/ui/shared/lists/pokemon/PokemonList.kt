@@ -20,14 +20,19 @@ fun PokemonList(
     pokemons: State<List<Pokemon>>,
     emptyView: @Composable () -> Unit = {
         EmptyView(text = stringResource(id = R.string.empty_pokemons))
-    }
+    },
+    onPokemonClicked: (pokemon: Pokemon) -> Unit = {}
 ) {
     val rememberPokemons = remember { pokemons }
     LazyColumn(
         contentPadding = PaddingValues(vertical = 10.dp, horizontal = 16.dp)
     ) {
         items(rememberPokemons.value.size) { index ->
-            PokemonItem(pokemon = rememberPokemons.value[index])
+            val pokemon = rememberPokemons.value[index]
+            PokemonItem(
+                pokemon = pokemon,
+                onClick = { onPokemonClicked(pokemon) }
+            )
             Spacer(modifier = Modifier.height(10.dp))
         }
     }

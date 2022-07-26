@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
@@ -14,6 +15,7 @@ import com.jesse.pokedex.R
 import com.jesse.pokedex.routing.AppBarState
 import com.jesse.pokedex.routing.AppState
 import com.jesse.pokedex.routing.SetAppState
+import com.jesse.pokedex.ui.shared.lists.pokemon.PokemonList
 import com.jesse.pokedex.ui.theme.Colors
 import com.jesse.pokedex.ui.theme.PokedexTheme
 
@@ -31,11 +33,14 @@ fun FavoritesScreen(
     navHostController: NavHostController = rememberNavController(),
     setAppState: SetAppState = {}
 ) {
+    val viewModel = FavoritesViewModel()
     initAppState(setAppState)
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-
+        PokemonList(
+            pokemons = viewModel.pokemons.collectAsState(initial = emptyList())
+        )
     }
 }
 

@@ -3,7 +3,6 @@ package com.jesse.pokedex.ui.screens.pokedex
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -21,11 +20,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import be.appwise.core.ui.base.BaseViewModel
 import com.jesse.pokedex.R
-import com.jesse.pokedex.data.entities.pokemon.Pokemon
 import com.jesse.pokedex.routing.AppBarState
 import com.jesse.pokedex.routing.AppState
 import com.jesse.pokedex.routing.Destinations
 import com.jesse.pokedex.routing.SetAppState
+import com.jesse.pokedex.ui.shared.lists.pokemon.PokemonList
 import com.jesse.pokedex.ui.theme.Colors
 import com.jesse.pokedex.ui.theme.PokedexTheme
 import com.jesse.pokedex.ui.theme.Shapes
@@ -215,19 +214,6 @@ fun FeatureButton(
                     style = TextStyles.FeatureButtonSubscript
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun PokemonList(pokemons: State<List<Pokemon>>) {
-    val rememberPokemons = remember { pokemons }
-    LazyColumn(
-        contentPadding = PaddingValues(vertical = 10.dp, horizontal = 16.dp)
-    ) {
-        items(rememberPokemons.value.size) { index ->
-            PokemonItem(pokemon = rememberPokemons.value[index])
-            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }

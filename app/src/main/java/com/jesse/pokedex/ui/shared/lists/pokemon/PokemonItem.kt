@@ -1,4 +1,4 @@
-package com.jesse.pokedex.ui.screens.pokedex
+package com.jesse.pokedex.ui.shared.lists.pokemon
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card

@@ -15,6 +15,7 @@ import com.jesse.pokedex.R
 import com.jesse.pokedex.routing.AppBarState
 import com.jesse.pokedex.routing.AppState
 import com.jesse.pokedex.routing.SetAppState
+import com.jesse.pokedex.ui.shared.EmptyView
 import com.jesse.pokedex.ui.shared.lists.pokemon.PokemonList
 import com.jesse.pokedex.ui.theme.Colors
 import com.jesse.pokedex.ui.theme.PokedexTheme
@@ -39,7 +40,12 @@ fun MyTeamScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         PokemonList(
-            pokemons = viewModel.pokemons.collectAsState(initial = emptyList())
+            pokemons = viewModel.pokemons.collectAsState(initial = emptyList()),
+            emptyView = {
+                EmptyView(
+                    text = stringResource(R.string.empty_team)
+                )
+            }
         )
     }
 }

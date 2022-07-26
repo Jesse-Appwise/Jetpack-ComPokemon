@@ -24,6 +24,7 @@ import com.jesse.pokedex.routing.AppBarState
 import com.jesse.pokedex.routing.AppState
 import com.jesse.pokedex.routing.Destinations
 import com.jesse.pokedex.routing.SetAppState
+import com.jesse.pokedex.ui.shared.EmptyView
 import com.jesse.pokedex.ui.shared.lists.pokemon.PokemonList
 import com.jesse.pokedex.ui.theme.Colors
 import com.jesse.pokedex.ui.theme.PokedexTheme
@@ -73,7 +74,15 @@ fun PokeDexScreen(
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
-        PokemonList(viewModel.pokemons.collectAsState(emptyList()))
+        PokemonList(
+            pokemons = viewModel.pokemons.collectAsState(emptyList()),
+            emptyView = {
+                EmptyView(
+                    text = stringResource(id = R.string.empty_pokemons),
+                    textColor = Colors.Font_Black
+                )
+            }
+        )
     }
     LoadingIndicator(viewModel = viewModel)
 }

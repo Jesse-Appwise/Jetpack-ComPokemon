@@ -5,14 +5,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.jesse.pokedex.App
+import com.jesse.pokedex.data.dao.FavoriteDao
 import com.jesse.pokedex.data.dao.PokemonDao
+import com.jesse.pokedex.data.dao.TeamDao
+import com.jesse.pokedex.data.entities.favorite.FavoritePokemon
 import com.jesse.pokedex.data.entities.pokemon.Pokemon
 import com.jesse.pokedex.data.entities.pokemon.Sprites
 import com.jesse.pokedex.data.entities.pokemon.Type
+import com.jesse.pokedex.data.entities.team.TeamMember
 
 @Database(
     entities = [
-        Pokemon::class
+        Pokemon::class,
+        FavoritePokemon::class,
+        TeamMember::class
     ], version = 1, exportSchema = false
 )
 @TypeConverters(
@@ -24,6 +30,8 @@ import com.jesse.pokedex.data.entities.pokemon.Type
 abstract class PokemonDb : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
+    abstract fun favoriteDao(): FavoriteDao
+    abstract fun teamDao(): TeamDao
 
     companion object {
         @Volatile

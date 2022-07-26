@@ -47,4 +47,11 @@ object TextStyles {
         fontSize = 12.sp,
         lineHeight = 14.32.sp
     )
+
+    val EmptyText = TextStyle.Default.copy(
+        color = Colors.Font_White,
+        fontWeight = FontWeight(700),
+        fontSize = 18.sp,
+        lineHeight = 22.sp
+    )
 }

@@ -1,6 +1,5 @@
 package com.jesse.pokedex.ui.screens.pokedex
 
-import android.util.Log
 import be.appwise.core.ui.base.BaseViewModel
 import com.jesse.pokedex.repositories.PokemonRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi

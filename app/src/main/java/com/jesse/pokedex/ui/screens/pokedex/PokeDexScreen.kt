@@ -1,6 +1,5 @@
 package com.jesse.pokedex.ui.screens.pokedex
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,9 +17,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import be.appwise.core.ui.base.BaseViewModel
 import com.jesse.pokedex.R
 import com.jesse.pokedex.data.entities.pokemon.Pokemon
+import com.jesse.pokedex.routing.AppBarState
+import com.jesse.pokedex.routing.AppState
+import com.jesse.pokedex.routing.Destinations
+import com.jesse.pokedex.routing.SetAppState
 import com.jesse.pokedex.ui.theme.Colors
 import com.jesse.pokedex.ui.theme.PokedexTheme
 import com.jesse.pokedex.ui.theme.Shapes
@@ -39,8 +44,12 @@ private fun PokeDexScreenPreview() {
 }
 
 @Composable
-fun PokeDexScreen() {
+fun PokeDexScreen(
+    navHostController: NavHostController = rememberNavController(),
+    setAppState: SetAppState = {}
+) {
     val viewModel = PokeDexViewModel()
+    initAppState(setAppState)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -54,14 +63,28 @@ fun PokeDexScreen() {
                 .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            MyTeamButton(modifier = Modifier.weight(1f))
+            MyTeamButton(
+                modifier = Modifier.weight(1f),
+                onClick = { navHostController.navigate(Destinations.MyTeamScreen.route) }
+            )
             Spacer(modifier = Modifier.width(9.dp))
-            FavoritesButton(modifier = Modifier.weight(1f))
+            FavoritesButton(
+                modifier = Modifier.weight(1f),
+                onClick = { navHostController.navigate(Destinations.FavoritesScreen.route) }
+            )
         }
         Spacer(modifier = Modifier.height(10.dp))
         PokemonList(viewModel.pokemons.collectAsState(emptyList()))
     }
     LoadingIndicator(viewModel = viewModel)
+}
+
+@Composable
+private fun initAppState(setAppState: SetAppState) {
+    val appBar = AppBarState(
+        title = stringResource(id = R.string.app_name)
+    )
+    setAppState(AppState(appBar))
 }
 
 @Composable
@@ -111,37 +134,35 @@ fun SearchView(modifier: Modifier = Modifier, onQueryChanged: (query: String) ->
 
 @Composable
 fun MyTeamButton(
-    modifier: Modifier
+    modifier: Modifier,
+    onClick: () -> Unit
 ) {
     FeatureButton(
         title = stringResource(R.string.my_team),
         subscript = "4 pokemons",
         gradientColors = listOf(
-            Colors.Btn_My_Team_Gradient_Start,
-            Colors.Btn_My_Team_Gradient_End
+            Colors.My_Team_Gradient_Start,
+            Colors.My_Team_Gradient_End
         ),
         modifier = modifier,
-        onClick = {
-            Log.d("MyTeamButton", "onClick: navigate to My Team")
-        }
+        onClick = onClick
     )
 }
 
 @Composable
 fun FavoritesButton(
-    modifier: Modifier
+    modifier: Modifier,
+    onClick: () -> Unit
 ) {
     FeatureButton(
         title = stringResource(R.string.my_favorites),
         subscript = "14 pokemons",
         gradientColors = listOf(
-            Colors.Btn_Favorites_Gradient_Start,
-            Colors.Btn_Favorites_Gradient_End
+            Colors.Favorites_Gradient_Start,
+            Colors.Favorites_Gradient_End
         ),
         modifier = modifier,
-        onClick = {
-            Log.d("FavoritesButton", "onClick: navigate to favorites")
-        }
+        onClick = onClick
     )
 }
 
@@ -212,9 +233,9 @@ fun PokemonList(pokemons: State<List<Pokemon>>) {
 }
 
 @Composable
-fun LoadingIndicator(viewModel: BaseViewModel){
+fun LoadingIndicator(viewModel: BaseViewModel) {
     val isLoading by viewModel.loading.observeAsState(false)
-    if(isLoading){
+    if (isLoading) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Bottom

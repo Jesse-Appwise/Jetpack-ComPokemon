@@ -11,11 +11,11 @@ object Colors {
     val Background_Grey = Color(0xFFEFF0F1)
     val Font_Light_Secondary = Color(0x993C3C43)
 
-    val Btn_My_Team_Gradient_Start = Color(0xFF46469C)
-    val Btn_My_Team_Gradient_End = Color(0xFF7E32E0)
+    val My_Team_Gradient_Start = Color(0xFF46469C)
+    val My_Team_Gradient_End = Color(0xFF7E32E0)
 
-    val Btn_Favorites_Gradient_Start = Color(0xFF65CB9A)
-    val Btn_Favorites_Gradient_End = Color(0xFF15D0DC)
+    val Favorites_Gradient_Start = Color(0xFF65CB9A)
+    val Favorites_Gradient_End = Color(0xFF15D0DC)
 
     val Font_White = Color(0xFFFFFFFF)
     val Font_White_50 = Color(0x88FFFFFF)

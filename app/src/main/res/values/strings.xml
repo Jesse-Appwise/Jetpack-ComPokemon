@@ -7,4 +7,8 @@
     <string name="empty_pokemons">No pokemons found.</string>
     <string name="empty_favorite">No favorite pokemons.</string>
     <string name="empty_team">Your team is empty.</string>
+    <plurals name="x_pokemons">
+        <item quantity="one">%d pokemon</item>
+        <item quantity="other">%d pokemons</item>
+    </plurals>
 </resources>

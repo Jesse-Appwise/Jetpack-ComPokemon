@@ -1,16 +1,18 @@
 package com.jesse.pokedex.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.jesse.pokedex.R
 import com.jesse.pokedex.routing.AppBarState
@@ -34,7 +36,7 @@ fun AppScaffold() {
         mutableStateOf(AppState(AppBarState(title = appName)))
     }
     Scaffold(
-        topBar = { TopBar(appState.value) }
+        topBar = { TopBar(appState.value, navHostController) }
     ) {
         Box(
             modifier = appState.value.createBackground(Modifier)
@@ -45,7 +47,7 @@ fun AppScaffold() {
 }
 
 @Composable
-fun TopBar(appState: AppState) {
+fun TopBar(appState: AppState, navController: NavHostController) {
     TopAppBar(
         modifier = appState.createBackground(Modifier),
         actions = {
@@ -56,6 +58,21 @@ fun TopBar(appState: AppState) {
                 text = appState.appBarState.title,
                 color = appState.appBarState.titleColor
             )
+        },
+        navigationIcon = if (navController.previousBackStackEntry != null) {
+            {
+                IconButton(
+                    onClick = { navController.popBackStack() }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        tint = appState.appBarState.titleColor,
+                        contentDescription = "Back"
+                    )
+                }
+            }
+        } else {
+            null
         },
         backgroundColor = Color.Transparent,
         elevation = 0.dp

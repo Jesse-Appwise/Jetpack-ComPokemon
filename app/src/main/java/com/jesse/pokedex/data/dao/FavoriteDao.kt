@@ -12,6 +12,12 @@ abstract class FavoriteDao : BaseRoomDao<FavoritePokemon>(FavoritePokemon.TABLE_
     @Query("SELECT COUNT(*) FROM ${FavoritePokemon.TABLE_NAME} WHERE id = :id")
     abstract suspend fun checkIfPokemonIsFavorite(id: Int): Int
 
+    @Query("SELECT COUNT(*) FROM ${FavoritePokemon.TABLE_NAME} WHERE id = :id")
+    abstract fun checkIfPokemonIsFavoriteFlow(id: Int): Flow<Int>
+
+    @Query("SELECT COUNT(*) FROM ${FavoritePokemon.TABLE_NAME}")
+    abstract fun countFavoritePokemons(): Flow<Int>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun setPokemonAsFavorite(pokemon: FavoritePokemon)
 
@@ -19,11 +25,11 @@ abstract class FavoriteDao : BaseRoomDao<FavoritePokemon>(FavoritePokemon.TABLE_
     abstract suspend fun removePokemonAsFavorite(pokemon: FavoritePokemon)
 
     @Transaction
-    open suspend fun togglePokemonIsFavorite(pokemon: Pokemon) {
-        if (checkIfPokemonIsFavorite(pokemon.id) != 0) {
-            setPokemonAsFavorite(FavoritePokemon(pokemon.id))
+    open suspend fun togglePokemonIsFavorite(pokemonId: Int) {
+        if (checkIfPokemonIsFavorite(pokemonId) == 0) {
+            setPokemonAsFavorite(FavoritePokemon(pokemonId))
         } else {
-            removePokemonAsFavorite(FavoritePokemon(pokemon.id))
+            removePokemonAsFavorite(FavoritePokemon(pokemonId))
         }
     }
 

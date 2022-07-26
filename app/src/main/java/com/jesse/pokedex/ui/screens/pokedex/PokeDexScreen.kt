@@ -30,6 +30,7 @@ import com.jesse.pokedex.ui.theme.Colors
 import com.jesse.pokedex.ui.theme.PokedexTheme
 import com.jesse.pokedex.ui.theme.Shapes
 import com.jesse.pokedex.ui.theme.TextStyles
+import com.jesse.pokedex.util.pluralResource
 
 @Preview
 @Composable
@@ -69,6 +70,7 @@ fun PokeDexScreen(
             )
             Spacer(modifier = Modifier.width(9.dp))
             FavoritesButton(
+                viewModel.countFavoritePokemons.collectAsState(initial = 0),
                 modifier = Modifier.weight(1f),
                 onClick = { navHostController.navigate(Destinations.FavoritesScreen.route) }
             )
@@ -162,12 +164,14 @@ fun MyTeamButton(
 
 @Composable
 fun FavoritesButton(
+    pokemonCount: State<Int>,
     modifier: Modifier,
     onClick: () -> Unit
 ) {
+    val count = remember { pokemonCount }
     FeatureButton(
         title = stringResource(R.string.my_favorites),
-        subscript = "14 pokemons",
+        subscript = pluralResource(resId = R.plurals.x_pokemons, quantity = count.value),
         gradientColors = listOf(
             Colors.Favorites_Gradient_Start,
             Colors.Favorites_Gradient_End

@@ -1,6 +1,7 @@
 package com.jesse.pokedex.routing
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -44,11 +45,13 @@ fun AppNavHost(navController: NavHostController, appState: MutableState<AppState
             Destinations.PokemonDetailScreen.route,
             arguments = listOf(navArgument("pokemonId") { type = NavType.IntType })
         ){
-            PokemonDetailScreen(
-                pokemonId = it.arguments?.getInt("pokemonId") ?: 0,
-                navHostController = navController,
-                setAppState = updateAppState
-            )
+            if (navController.currentDestination?.route == Destinations.PokemonDetailScreen.route){
+                PokemonDetailScreen(
+                    pokemonId = it.arguments?.getInt("pokemonId") ?: 0,
+                    navHostController = navController,
+                    setAppState = updateAppState
+                )
+            }
         }
     }
 }

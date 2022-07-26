@@ -45,6 +45,9 @@ fun FavoritesScreen(
                 EmptyView(
                     text = stringResource(R.string.empty_favorite)
                 )
+            },
+            onPokemonClicked = {
+                navHostController.navigate("pokemon/${it.id}")
             }
         )
     }

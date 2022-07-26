@@ -45,6 +45,9 @@ fun MyTeamScreen(
                 EmptyView(
                     text = stringResource(R.string.empty_team)
                 )
+            },
+            onPokemonClicked = {
+                navHostController.navigate("pokemon/${it.id}")
             }
         )
     }

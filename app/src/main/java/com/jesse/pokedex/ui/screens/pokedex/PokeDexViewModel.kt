@@ -15,6 +15,8 @@ class PokeDexViewModel : BaseViewModel() {
         query.tryEmit(newQuery)
     }
 
+    val countFavoritePokemons = PokemonRepository.countFavoritePokemons()
+
     private var initialisation = true
 
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)

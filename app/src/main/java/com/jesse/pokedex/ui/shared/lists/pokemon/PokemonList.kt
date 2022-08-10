@@ -27,7 +27,10 @@ fun PokemonList(
     LazyColumn(
         contentPadding = PaddingValues(vertical = 10.dp, horizontal = 16.dp)
     ) {
-        items(rememberPokemons.value.size) { index ->
+        items(
+            count = rememberPokemons.value.size,
+            key = { rememberPokemons.value[it].id }
+        ) { index ->
             val pokemon = rememberPokemons.value[index]
             PokemonItem(
                 pokemon = pokemon,
@@ -38,6 +41,5 @@ fun PokemonList(
     }
     if (rememberPokemons.value.isEmpty()){
         emptyView()
-
     }
 }

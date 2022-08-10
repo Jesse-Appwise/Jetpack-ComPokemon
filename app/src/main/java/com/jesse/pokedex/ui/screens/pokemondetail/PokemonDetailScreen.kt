@@ -42,9 +42,11 @@ fun PokemonDetailScreenPreview() {
 fun PokemonDetailScreen(
     pokemonId: Int,
     navHostController: NavHostController = rememberNavController(),
-    setAppState: SetAppState = {}
+    setAppState: SetAppState = {},
+    viewModel: PokemonDetailViewModel = androidx.lifecycle.viewmodel.compose.viewModel{
+        PokemonDetailViewModel(pokemonId)
+    }
 ) {
-    val viewModel = PokemonDetailViewModel(pokemonId)
     initAppState(setAppState, viewModel)
     val pokemonState = viewModel.pokemon.collectAsState(initial = null)
     val pokemon = remember { pokemonState }

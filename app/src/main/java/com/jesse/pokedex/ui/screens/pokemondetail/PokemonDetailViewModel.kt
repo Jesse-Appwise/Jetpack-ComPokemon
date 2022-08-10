@@ -9,6 +9,14 @@ class PokemonDetailViewModel(val pokemonId: Int): BaseViewModel() {
     val pokemon = PokemonRepository.findPokemonById(pokemonId).filterNotNull()
     val pokemonIsFavorite = PokemonRepository.checkIfPokemonIsFavorite(pokemonId)
 
+    init{
+        fetchPokemonDetails()
+    }
+
+    private fun fetchPokemonDetails() = launchAndLoad {
+        PokemonRepository.getPokemon(pokemonId)
+    }
+
     fun togglePokemonIsFavorite() = launchAndLoad {
         PokemonRepository.toggleFavoritePokemon(pokemonId)
     }

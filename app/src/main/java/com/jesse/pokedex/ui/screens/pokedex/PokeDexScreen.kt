@@ -47,16 +47,18 @@ private fun PokeDexScreenPreview() {
 @Composable
 fun PokeDexScreen(
     navHostController: NavHostController = rememberNavController(),
-    setAppState: SetAppState = {}
+    setAppState: SetAppState = {},
+    viewModel: PokeDexViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val viewModel = PokeDexViewModel()
     initAppState(setAppState)
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 14.dp)
     ) {
-        SearchView(onQueryChanged = viewModel::setQuery)
+        SearchView(
+            onQueryChanged = viewModel::setQuery
+        )
         Spacer(modifier = Modifier.height(19.dp))
         Row(
             modifier = Modifier

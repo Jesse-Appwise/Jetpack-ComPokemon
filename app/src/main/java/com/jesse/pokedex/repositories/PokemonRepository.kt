@@ -21,8 +21,14 @@ object PokemonRepository : BaseRepository {
     suspend fun toggleFavoritePokemon(pokemonId: Int) = favoriteDao.togglePokemonIsFavorite(pokemonId)
     fun countFavoritePokemons() = favoriteDao.countFavoritePokemons()
 
-    suspend fun getPokemons() = doCall(RestClient.pokeService.getPokemons()).also { pokemons ->
-        pokeDao.insertMany(pokemons)
-    }
+    suspend fun getPokemons() =
+        doCall(RestClient.pokeService.getPokemons()).also { pokemons ->
+            pokeDao.insertMany(pokemons)
+        }
+
+    suspend fun getPokemon(pokemonId: Int) =
+        doCall(RestClient.pokeDetailService.getPokemon(pokemonId)).also {
+
+        }
 
 }
